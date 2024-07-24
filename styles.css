@@ -1,0 +1,37 @@
+body {
+  background-color: #1a1a2e;
+  color: #e0e0eb;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  color: #00aaff;
+}
+
+button {
+  background-color: #00aaff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005f7f;
+}
+
+label {
+  display: block;
+  margin: 10px 0;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
