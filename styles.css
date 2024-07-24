@@ -23,7 +23,7 @@ main {
   height: calc(100vh - 2rem);
 }
 
-.register {
+.login, .register {
   display: flex;
   background-color: #1e1e1e;
   border-radius: 10px;
@@ -31,18 +31,18 @@ main {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.register-left {
+.login-left, .register-left {
   flex: 1;
   background-color: #2e2e2e;
 }
 
-.register-left img {
+.login-left img, .register-left img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.register-right {
+.login-right, .register-right {
   flex: 1;
   padding: 2rem;
   display: flex;
@@ -50,29 +50,29 @@ main {
   justify-content: center;
 }
 
-.register-right h2 {
+.login-right h2, .register-right h2 {
   margin-bottom: 1rem;
   color: #03a9f4;
 }
 
-.register-right form {
+.login-right form, .register-right form {
   display: flex;
   flex-direction: column;
 }
 
-.register-right label {
+.login-right label, .register-right label {
   margin-bottom: 0.5rem;
   color: #b0b0b0;
 }
 
-.register-right input {
+.login-right input, .register-right input {
   margin-bottom: 1rem;
   padding: 0.5rem;
   border: none;
   border-radius: 5px;
 }
 
-.register-right button {
+.login-right button, .register-right button {
   padding: 0.5rem;
   border: none;
   border-radius: 5px;
@@ -82,21 +82,21 @@ main {
   cursor: pointer;
 }
 
-.register-right button:hover {
+.login-right button:hover, .register-right button:hover {
   background-color: #0288d1;
 }
 
-.register-right p {
+.login-right p, .register-right p {
   margin-top: 1rem;
   color: #b0b0b0;
 }
 
-.register-right a {
+.login-right a, .register-right a {
   color: #03a9f4;
   text-decoration: none;
 }
 
-.register-right a:hover {
+.login-right a:hover, .register-right a:hover {
   text-decoration: underline;
 }
 
