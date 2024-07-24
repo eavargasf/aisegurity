@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Security - Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Dashboard</h1>
+  </header>
+  <main>
+    <section class="dashboard">
+      <div class="feature">
+        <h2>Enhanced Safe Browsing</h2>
+        <p>Keep your browsing experience secure.</p>
+        <img src="images/safe_browsing.jpg" alt="Safe Browsing">
+        <label>
+          <input type="checkbox" id="toggle-safe-browsing">
+          Enable/Disable
+        </label>
+      </div>
+      <div class="feature">
+        <h2>Stay Updated</h2>
+        <p>Ensure your browser is always up-to-date.</p>
+        <img src="images/update.jpg" alt="Stay Updated">
+        <label>
+          <input type="checkbox" id="toggle-update">
+          Enable/Disable
+        </label>
+      </div>
+      <div class="feature">
+        <h2>Security Notifications</h2>
+        <p>Receive notifications for suspicious activities.</p>
+        <img src="images/notifications.jpg" alt="Security Notifications">
+        <label>
+          <input type="checkbox" id="toggle-notifications">
+          Enable/Disable
+        </label>
+      </div>
+      <div class="feature">
+        <h2>Block Ads and Trackers</h2>
+        <p>Protect your privacy by blocking ads and tracking cookies.</p>
+        <img src="images/block_ads.jpg" alt="Block Ads">
+        <label>
+          <input type="checkbox" id="toggle-block-ads">
+          Enable/Disable
+        </label>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2024 AI Security. All rights reserved.</p>
+  </footer>
+</body>
+</html>
