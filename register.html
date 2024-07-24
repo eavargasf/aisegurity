@@ -31,6 +31,8 @@
       const data = await response.json();
       if (response.ok) {
         alert('Registration successful!');
+        // Redirect to dashboard page
+        window.location.href = 'dashboard.html';
       } else {
         alert('Error: ' + data.error.message);
       }
