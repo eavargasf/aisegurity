@@ -110,16 +110,67 @@ footer {
   width: 100%;
 }
 
-.dashboard .functionality {
-  background-color: white;
-  margin-bottom: 1em;
-  padding: 1em;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #fff;
 }
 
-.dashboard .functionality img {
-  max-width: 100px;
-  display: block;
-  margin-bottom: 1em;
+header {
+    background-color: #333;
+    padding: 1em;
+}
+
+nav a {
+    color: white;
+    margin: 0 1em;
+    text-decoration: none;
+}
+
+.dashboard {
+    padding: 2em;
+}
+
+.functionalities-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    justify-content: center;
+}
+
+.functionality {
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 1em;
+    width: 200px;
+    text-align: center;
+}
+
+.functionality h3 {
+    margin-top: 0;
+}
+
+.functionality img {
+    max-width: 100px;
+    margin-bottom: 1em;
+}
+
+button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: #555;
+}
+
+button:hover:not(:disabled) {
+    background-color: #0056b3;
 }
