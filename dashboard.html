@@ -14,9 +14,9 @@
         return;
       }
 
-      const response = await fetch(`https://api.airtable.com/v0/YOUR_BASE_ID/Users?filterByFormula={UserId}='${userId}'`, {
+      const response = await fetch(`https://api.airtable.com/v0/appFZBJefIOmr86zR/Users?filterByFormula={UserId}='${userId}'`, {
         headers: {
-          'Authorization': 'Bearer YOUR_API_KEY',
+          'Authorization': 'Bearer patvsM7l2QxYV6BSV.e48172c74aea3f9b96ae4918907e30c45f0ca719bbc2ad91173fddbbaa25e426',
           'Content-Type': 'application/json'
         }
       });
@@ -26,9 +26,9 @@
     }
 
     async function fetchFunctionalities() {
-      const response = await fetch('https://api.airtable.com/v0/YOUR_BASE_ID/Functionalities', {
+      const response = await fetch('https://api.airtable.com/v0/appFZBJefIOmr86zR/Functionalities', {
         headers: {
-          'Authorization': 'Bearer YOUR_API_KEY',
+          'Authorization': 'Bearer patvsM7l2QxYV6BSV.e48172c74aea3f9b96ae4918907e30c45f0ca719bbc2ad91173fddbbaa25e426',
           'Content-Type': 'application/json'
         }
       });
@@ -74,10 +74,10 @@
 
     async function toggleFunctionality(id, activate) {
       try {
-        const response = await fetch(`https://api.airtable.com/v0/YOUR_BASE_ID/Functionalities/${id}`, {
+        const response = await fetch(`https://api.airtable.com/v0/appFZBJefIOmr86zRFunctionalities/${id}`, {
           method: 'PATCH',
           headers: {
-            'Authorization': 'Bearer YOUR_API_KEY',
+            'Authorization': 'patvsM7l2QxYV6BSV.e48172c74aea3f9b96ae4918907e30c45f0ca719bbc2ad91173fddbbaa25e426',
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
