@@ -6,7 +6,21 @@
   <title>AI Security - Dashboard</title>
   <link rel="stylesheet" href="styles.css">
   <script>
+    async function fetchUserData() {
+      // Fetch user data from Airtable
+      const response = await fetch('https://api.airtable.com/v0/appFZBJefIOmr86zR/Users?filterByFormula=YOUR_USER_ID_FILTER', {
+        headers: {
+          'Authorization': 'Bearer patvsM7l2QxYV6BSV.e48172c74aea3f9b96ae4918907e30c45f0ca719bbc2ad91173fddbbaa25e426',
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const data = await response.json();
+      return data.records[0].fields;
+    }
+
     async function fetchFunctionalities() {
+      // Fetch functionalities from Airtable
       const response = await fetch('https://api.airtable.com/v0/appFZBJefIOmr86zR/Functionalities', {
         headers: {
           'Authorization': 'Bearer patvsM7l2QxYV6BSV.e48172c74aea3f9b96ae4918907e30c45f0ca719bbc2ad91173fddbbaa25e426',
@@ -15,9 +29,19 @@
       });
 
       const data = await response.json();
+      return data.records;
+    }
+
+    async function renderDashboard() {
+      const user = await fetchUserData();
+      const functionalities = await fetchFunctionalities();
+
+      const userName = document.getElementById('user-name');
+      userName.textContent = user.Name;
+
       const functionalitiesContainer = document.getElementById('functionalities-container');
 
-      data.records.forEach(record => {
+      functionalities.forEach(record => {
         const functionality = record.fields;
 
         const functionalityDiv = document.createElement('div');
@@ -61,7 +85,7 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', fetchFunctionalities);
+    document.addEventListener('DOMContentLoaded', renderDashboard);
   </script>
   <style>
     /* Add styles for navigation menu and layout */
@@ -118,6 +142,7 @@
   </nav>
   <main>
     <section class="dashboard">
+      <h2>Welcome, <span id="user-name"></span></h2>
       <h2>Your Functionalities</h2>
       <div id="functionalities-container"></div>
     </section>
