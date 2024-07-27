@@ -85,3 +85,24 @@ button:hover {
 #message {
   margin-top: 10px;
 }
+#popup-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 300px;
+}
+
+.popup {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.popup.show {
+  opacity: 1;
+}
