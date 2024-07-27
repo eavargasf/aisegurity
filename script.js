@@ -11,9 +11,18 @@ document.getElementById('go-button').addEventListener('click', () => {
 });
 
 function activateNotifications() {
-  // Example: Notify user of various security events
-  showPopupNotification('Enhanced safe browsing is turned on.');
-  showPopupNotification('Chrome is up-to-date.');
+  // Request notification permission
+  if (Notification.permission === 'granted') {
+    showNotification('Enhanced safe browsing is turned on.');
+    showNotification('Chrome is up-to-date.');
+  } else if (Notification.permission !== 'denied') {
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        showNotification('Enhanced safe browsing is turned on.');
+        showNotification('Chrome is up-to-date.');
+      }
+    });
+  }
 
   // Check for AI-generated content (simulate with a timeout)
   setTimeout(() => {
@@ -21,25 +30,11 @@ function activateNotifications() {
   }, 2000);
 }
 
-function showPopupNotification(message) {
-  const popupContainer = document.getElementById('popup-container');
-  const popup = document.createElement('div');
-  popup.className = 'popup';
-  popup.innerText = message;
-  popupContainer.appendChild(popup);
-
-  // Show the popup with a fade-in effect
-  setTimeout(() => {
-    popup.classList.add('show');
-  }, 10);
-
-  // Automatically remove the popup after 5 seconds
-  setTimeout(() => {
-    popup.classList.remove('show');
-    setTimeout(() => {
-      popup.remove();
-    }, 500);
-  }, 5000);
+function showNotification(message) {
+  new Notification('AI Security Alert', {
+    body: message,
+    icon: 'icons/icon48.png'  // Add the path to your icon file
+  });
 }
 
 function checkForAIContent() {
@@ -47,7 +42,7 @@ function checkForAIContent() {
   const aiContentDetected = Math.random() > 0.5; // Randomly simulate detection
 
   if (aiContentDetected) {
-    showPopupNotification('AI-generated content detected on this page.');
+    showNotification('AI-generated content detected on this page.');
   }
 }
 
@@ -56,7 +51,6 @@ setInterval(() => {
   // Example: Notify user to use a VPN when on public Wi-Fi (simulated)
   const onPublicWiFi = Math.random() > 0.7; // Randomly simulate condition
   if (onPublicWiFi) {
-    showPopupNotification('Consider using a VPN to encrypt your traffic.');
+    showNotification('Consider using a VPN to encrypt your traffic.');
   }
 }, 10000); // Check every 10 seconds
-
