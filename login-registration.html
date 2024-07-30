@@ -3,116 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Uncuffed - Login/Register</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔓</text></svg>">
+    <title>Login & Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1200px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .graph {
+            flex: 1;
+            padding: 20px;
+            border-right: 1px solid #ccc;
+        }
+        .graph img {
+            width: 100%;
+            height: auto;
+        }
+        .form-container {
+            flex: 1;
+            padding: 20px;
+        }
+    </style>
 </head>
-   
-    <main>
-    <section class="register">
-      <div class="register-center">
-        <img src="icon16-removebg-preview (1).png" alt="Register">
-      </div>
-        <div class="register-right">
-<body class="bg-gray-100">
-    <div class="container mx-auto px-4 py-8">
-        <div id="loginForm" class="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
-            <div class="p-6">
-                <h2 class="text-2xl font-bold mb-4">Welcome to The Uncuffed</h2>
-                <form id="loginFormElement">
-                    <input type="email" name="email" placeholder="Email" class="w-full px-3 py-2 mb-3 border rounded" required>
-                    <input type="password" name="password" placeholder="Password" class="w-full px-3 py-2 mb-3 border rounded" required>
-                    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">Login</button>
-                </form>
-                <p class="text-center mt-4">Don't have an account? <a href="#" id="showRegister" class="text-blue-500">Register</a></p>
-            </div>
+<body>
+    <div class="container">
+        <div class="graph" id="graph-container">
+            <img src="your-graph-image-url.jpg" alt="Graph Image">
         </div>
-        
-        <div id="registerForm" class="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden mt-8" style="display: none;">
-            <div class="p-6">
-                <h2 class="text-2xl font-bold mb-4">Register for Lifetime Access</h2>
-                <form id="registerFormElement">
-                    <input type="text" name="name" placeholder="Name" class="w-full px-3 py-2 mb-3 border rounded" required>
-                    <input type="email" name="email" placeholder="Email" class="w-full px-3 py-2 mb-3 border rounded" required>
-                    <input type="password" name="password" placeholder="Password" class="w-full px-3 py-2 mb-3 border rounded" required>
-                    <input type="password" name="confirmPassword" placeholder="Confirm Password" class="w-full px-3 py-2 mb-3 border rounded" required>
-                    <input type="text" name="redeemCode" placeholder="Redeem Code" class="w-full px-3 py-2 mb-3 border rounded" required>
-                    <button type="submit" class="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600">Create an Account</button>
-                </form>
-                <p class="text-center mt-4">Already have an account? <a href="#" id="showLogin" class="text-blue-500">Login</a></p>
-            </div>
+        <div class="form-container">
+            <form id="registration-form">
+                <h2>Register</h2>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <label for="redeem-code">Redeem Code:</label>
+                <input type="text" id="redeem-code" name="redeem-code" required>
+                <button type="submit">Register</button>
+            </form>
+            <form id="login-form">
+                <h2>Login</h2>
+                <label for="email-login">Email:</label>
+                <input type="email" id="email-login" name="email" required>
+                <label for="password-login">Password:</label>
+                <input type="password" id="password-login" name="password" required>
+                <button type="submit">Login</button>
+            </form>
         </div>
     </div>
-        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        // Simulated redeem codes
-        const validRedeemCodes = ['CODE1', 'CODE2', 'CODE3'];
+        const validRedeemCodes = ['AI1532', 'AI1234', 'AI5678'];
 
-        function login(email, password) {
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            const user = users.find(u => u.email === email && u.password === password);
-            if (user) {
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                alert('Login successful!');
-                window.location.href = 'dashboard.html';
-            } else {
-                alert('Invalid credentials');
-            }
-        }
+        document.getElementById('registration-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const redeemCode = document.getElementById('redeem-code').value;
 
-        function register(name, email, password, redeemCode) {
             if (!validRedeemCodes.includes(redeemCode)) {
-                alert('Invalid redeem code');
+                alert('Invalid Redeem Code');
                 return;
             }
 
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            if (users.some(u => u.email === email)) {
-                alert('Email already registered');
-                return;
-            }
-
-            users.push({ name, email, password, redeemCode });
-            localStorage.setItem('users', JSON.stringify(users));
-            alert('Registration successful! Please login.');
-            showLoginForm();
-        }
-
-        function showLoginForm() {
-            document.getElementById('loginForm').style.display = 'block';
-            document.getElementById('registerForm').style.display = 'none';
-        }
-
-        function showRegisterForm() {
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('registerForm').style.display = 'block';
-        }
-
-        document.getElementById('loginFormElement').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = e.target.elements.email.value;
-            const password = e.target.elements.password.value;
-            login(email, password);
+            axios.post('https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations', {
+                fields: {
+                    Name: name,
+                    Email: email,
+                    Password: password,
+                    RedeemCode: redeemCode
+                }
+            }, {
+                headers: {
+                    'Authorization': 'Bearer patvsM7l2QxYV6BSV.e48172c74aea3f9b96ae4918907e30c45f0ca719bbc2ad91173fddbbaa25e426',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                alert('Registration successful!');
+                console.log(response);
+            })
+            .catch(error => {
+                alert('Error registering!');
+                console.error(error);
+            });
         });
 
-        document.getElementById('registerFormElement').addEventListener('submit', (e) => {
+        document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            const name = e.target.elements.name.value;
-            const email = e.target.elements.email.value;
-            const password = e.target.elements.password.value;
-            const confirmPassword = e.target.elements.confirmPassword.value;
-            const redeemCode = e.target.elements.redeemCode.value;
+            const email = document.getElementById('email-login').value;
+            const password = document.getElementById('password-login').value;
 
-            if (password !== confirmPassword) {
-                alert("Passwords don't match");
-                return;
-            }
+            axios.get('https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations', {
+                headers: {
+                    'Authorization': 'Bearer patvsM7l2QxYV6BSV.e48172c74aea3f9b96ae4918907e30c45f0ca719bbc2ad91173fddbbaa25e426'
+                }
+            })
+            .then(response => {
+                const records = response.data.records;
+                const user = records.find(record => record.fields.Email === email && record.fields.Password === password);
 
-            register(name, email, password, redeemCode);
+                if (user) {
+                    alert('Login successful!');
+                } else {
+                    alert('Invalid email or password.');
+                }
+            })
+            .catch(error => {
+                alert('Error logging in!');
+                console.error(error);
+            });
         });
-
-        document.getElementById('showRegister').addEventListener('click', showRegisterForm);
-        document.getElementById('showLogin').addEventListener('click', showLoginForm);
     </script>
 </body>
 </html>
+
