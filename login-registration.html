@@ -75,7 +75,12 @@
         button:hover {
             background-color: #0056b3;
         }
+        .error-message {
+            color: red;
+            margin-bottom: 20px;
+        }
     </style>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔓</text></svg>">
 </head>
 <body>
     <div class="container">
@@ -84,7 +89,9 @@
         </div>
         <div class="form-container">
             <form id="registration-form">
+                <h1>Welcome to The Uncucuffed</h1>
                 <h2>Register</h2>
+                <div class="error-message" id="registration-error"></div>
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
                 <label for="email">Email:</label>
@@ -97,6 +104,7 @@
             </form>
             <form id="login-form">
                 <h2>Login</h2>
+                <div class="error-message" id="login-error"></div>
                 <label for="email-login">Email:</label>
                 <input type="email" id="email-login" name="email" required>
                 <label for="password-login">Password:</label>
@@ -117,8 +125,11 @@
             const password = document.getElementById('password').value;
             const redeemCode = document.getElementById('redeem-code').value;
 
+            const errorDiv = document.getElementById('registration-error');
+            errorDiv.textContent = '';
+
             if (!validRedeemCodes.includes(redeemCode)) {
-                alert('Invalid Redeem Code');
+                errorDiv.textContent = 'Invalid Redeem Code';
                 return;
             }
 
@@ -140,8 +151,7 @@
                 window.location.href = 'dashboard.html';
             })
             .catch(error => {
-                alert('Error registering!');
-                console.error(error);
+                errorDiv.textContent = 'Error registering: ' + error.message;
             });
         });
 
@@ -149,6 +159,9 @@
             e.preventDefault();
             const email = document.getElementById('email-login').value;
             const password = document.getElementById('password-login').value;
+
+            const errorDiv = document.getElementById('login-error');
+            errorDiv.textContent = '';
 
             axios.get('https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations', {
                 headers: {
@@ -163,12 +176,11 @@
                     alert('Login successful!');
                     window.location.href = 'dashboard.html';
                 } else {
-                    alert('Invalid email or password.');
+                    errorDiv.textContent = 'Invalid email or password.';
                 }
             })
             .catch(error => {
-                alert('Error logging in!');
-                console.error(error);
+                errorDiv.textContent = 'Error logging in: ' + error.message;
             });
         });
     </script>
