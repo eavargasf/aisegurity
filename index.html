@@ -190,6 +190,65 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </div>
     </section>
+    
+import React from 'react';
+import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+
+const PricingPlan = ({ title, price, savings, period, bestDeal, link }) => (
+  <Card className={`w-full max-w-sm ${bestDeal ? 'bg-purple-100 border-purple-500' : ''}`}>
+    <CardHeader>
+      <h3 className="text-lg font-semibold">{title}</h3>
+      {bestDeal && <span className="bg-purple-500 text-white px-2 py-1 rounded-full text-xs">BEST DEAL</span>}
+    </CardHeader>
+    <CardContent>
+      <div className="text-3xl font-bold">€{price}<span className="text-sm font-normal">/month</span></div>
+      {savings && <p className="text-green-600">Save €{savings}</p>}
+    </CardContent>
+    <CardFooter className="flex flex-col items-stretch gap-2">
+      <Button onClick={() => window.open(link, '_blank')} className={bestDeal ? 'bg-purple-500 hover:bg-purple-600' : ''}>
+        Get {period} plan
+      </Button>
+      <p className="text-sm text-center text-gray-500">30-day money-back guarantee</p>
+    </CardFooter>
+  </Card>
+);
+
+const PricingPlans = () => (
+  <div className="p-6 bg-white">
+    <h1 className="text-4xl font-bold text-center mb-8">Security. Privacy. Freedom. <span className="font-normal">For everyone.</span></h1>
+    <div className="flex justify-center space-x-4 mb-8">
+      <span className="text-sm">🔓 Open source</span>
+      <span className="text-sm">🔒 No-logs policy</span>
+      <span className="text-sm">🇨🇭 Swiss based</span>
+    </div>
+    <div className="flex flex-wrap justify-center gap-6">
+      <PricingPlan
+        title="1-month plan"
+        price="9.99"
+        period="1-month"
+        link="https://example.com/1-month-plan"
+      />
+      <PricingPlan
+        title="2-year plan"
+        price="4.49"
+        savings="132"
+        period="2-year"
+        bestDeal={true}
+        link="https://example.com/2-year-plan"
+      />
+      <PricingPlan
+        title="1-year plan"
+        price="4.99"
+        savings="60"
+        period="1-year"
+        link="https://example.com/1-year-plan"
+      />
+    </div>
+  </div>
+);
+
+export default PricingPlans;
 
     <footer>
         <div class="container">
