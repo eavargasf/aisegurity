@@ -6,32 +6,74 @@
     <title>Login & Registration</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            background-color: #f5f5f5;
         }
         .container {
             display: flex;
             width: 80%;
             max-width: 1200px;
-            border: 1px solid #ccc;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
         .graph {
             flex: 1;
             padding: 20px;
-            border-right: 1px solid #ccc;
+            border-right: 1px solid #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fafafa;
         }
         .graph img {
-            width: 100%;
+            max-width: 100%;
             height: auto;
         }
         .form-container {
             flex: 1;
-            padding: 20px;
+            padding: 40px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #666;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -95,7 +137,7 @@
             })
             .then(response => {
                 alert('Registration successful!');
-                console.log(response);
+                window.location.href = 'dashboard.html';
             })
             .catch(error => {
                 alert('Error registering!');
@@ -119,6 +161,7 @@
 
                 if (user) {
                     alert('Login successful!');
+                    window.location.href = 'dashboard.html';
                 } else {
                     alert('Invalid email or password.');
                 }
@@ -131,4 +174,3 @@
     </script>
 </body>
 </html>
-
