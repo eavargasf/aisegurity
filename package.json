@@ -1,5 +1,2 @@
 npm install
-npm start
-"scripts": {
-    "start": "node server.js"
-}
+node server.js
