@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creaitor.ai - Login/Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <div id="loginForm" class="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold mb-4">Welcome to Creaitor.ai</h2>
+                <form id="loginFormElement">
+                    <input type="email" name="email" placeholder="Email" class="w-full px-3 py-2 mb-3 border rounded" required>
+                    <input type="password" name="password" placeholder="Password" class="w-full px-3 py-2 mb-3 border rounded" required>
+                    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">Login</button>
+                </form>
+                <p class="text-center mt-4">Don't have an account? <a href="#" id="showRegister" class="text-blue-500">Register</a></p>
+            </div>
+        </div>
+        
+        <div id="registerForm" class="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden mt-8" style="display: none;">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold mb-4">Register for Lifetime Access</h2>
+                <form id="registerFormElement">
+                    <input type="text" name="name" placeholder="Name" class="w-full px-3 py-2 mb-3 border rounded" required>
+                    <input type="email" name="email" placeholder="Email" class="w-full px-3 py-2 mb-3 border rounded" required>
+                    <input type="password" name="password" placeholder="Password" class="w-full px-3 py-2 mb-3 border rounded" required>
+                    <input type="password" name="confirmPassword" placeholder="Confirm Password" class="w-full px-3 py-2 mb-3 border rounded" required>
+                    <input type="text" name="redeemCode" placeholder="Redeem Code" class="w-full px-3 py-2 mb-3 border rounded" required>
+                    <button type="submit" class="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600">Create an Account</button>
+                </form>
+                <p class="text-center mt-4">Already have an account? <a href="#" id="showLogin" class="text-blue-500">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simulated redeem codes
+        const validRedeemCodes = ['CODE1', 'CODE2', 'CODE3'];
+
+        function login(email, password) {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.email === email && u.password === password);
+            if (user) {
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                alert('Login successful!');
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('Invalid credentials');
+            }
+        }
+
+        function register(name, email, password, redeemCode) {
+            if (!validRedeemCodes.includes(redeemCode)) {
+                alert('Invalid redeem code');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            if (users.some(u => u.email === email)) {
+                alert('Email already registered');
+                return;
+            }
+
+            users.push({ name, email, password, redeemCode });
+            localStorage.setItem('users', JSON.stringify(users));
+            alert('Registration successful! Please login.');
+            showLoginForm();
+        }
+
+        function showLoginForm() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('registerForm').style.display = 'none';
+        }
+
+        function showRegisterForm() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+        }
+
+        document.getElementById('loginFormElement').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = e.target.elements.email.value;
+            const password = e.target.elements.password.value;
+            login(email, password);
+        });
+
+        document.getElementById('registerFormElement').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = e.target.elements.name.value;
+            const email = e.target.elements.email.value;
+            const password = e.target.elements.password.value;
+            const confirmPassword = e.target.elements.confirmPassword.value;
+            const redeemCode = e.target.elements.redeemCode.value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords don't match");
+                return;
+            }
+
+            register(name, email, password, redeemCode);
+        });
+
+        document.getElementById('showRegister').addEventListener('click', showRegisterForm);
+        document.getElementById('showLogin').addEventListener('click', showLoginForm);
+    </script>
+</body>
+</html>
