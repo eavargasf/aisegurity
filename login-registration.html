@@ -12,7 +12,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: darkblue;
+            background-color: #f5f5f5;
         }
         .container {
             display: flex;
@@ -80,16 +80,14 @@
             margin-bottom: 20px;
         }
     </style>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔓</text></svg>">
 </head>
 <body>
     <div class="container">
         <div class="graph" id="graph-container">
-            <img src="icon16-removebg-preview (1).png" alt="Graph Image">
+            <img src="your-graph-image-url.jpg" alt="Graph Image">
         </div>
         <div class="form-container">
             <form id="registration-form">
-                <h1>Welcome to The Uncuffed</h1>
                 <h2>Register</h2>
                 <div class="error-message" id="registration-error"></div>
                 <label for="name">Name:</label>
@@ -116,8 +114,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        const validRedeemCodes = ['AI1532', 'AI1234', 'AI5678'];
-
         document.getElementById('registration-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('name').value;
@@ -128,30 +124,18 @@
             const errorDiv = document.getElementById('registration-error');
             errorDiv.textContent = '';
 
-            if (!validRedeemCodes.includes(redeemCode)) {
-                errorDiv.textContent = 'Invalid Redeem Code';
-                return;
-            }
-
-            axios.post('https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations', {
-                fields: {
-                    Name: name,
-                    Email: email,
-                    Password: password,
-                    RedeemCode: redeemCode
-                }
-            }, {
-                headers: {
-                    'Authorization': 'Bearer patvsM7l2QxYV6BSV.e48172c74aea3f9b96ae4918907e30c45f0ca719bbc2ad91173fddbbaa25e426',
-                    'Content-Type': 'application/json'
-                }
+            axios.post('/register', {
+                name,
+                email,
+                password,
+                redeemCode
             })
             .then(response => {
                 alert('Registration successful!');
                 window.location.href = 'dashboard.html';
             })
             .catch(error => {
-                errorDiv.textContent = 'Error registering: ' + error.message;
+                errorDiv.textContent = 'Error registering: ' + (error.response ? error.response.data.error : error.message);
             });
         });
 
@@ -163,28 +147,16 @@
             const errorDiv = document.getElementById('login-error');
             errorDiv.textContent = '';
 
-            axios.get('https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations', {
-                headers: {
-                    'Authorization': 'Bearer patvsM7l2QxYV6BSV.e48172c74aea3f9b96ae4918907e30c45f0ca719bbc2ad91173fddbbaa25e426'
-                }
+            axios.post('/login', {
+                email,
+                password
             })
             .then(response => {
-                const records = response.data.records;
-                const user = records.find(record => record.fields.Email === email && record.fields.Password === password);
-
-                if (user) {
-                    alert('Login successful!');
-                    window.location.href = 'dashboard.html';
-                } else {
-                    errorDiv.textContent = 'Invalid email or password.';
-                }
+                alert('Login successful!');
+                window.location.href = 'dashboard.html';
             })
             .catch(error => {
-                if (error.response && error.response.status === 403) {
-                    errorDiv.textContent = 'Error logging in: Access forbidden. Please check your API token and permissions.';
-                } else {
-                    errorDiv.textContent = 'Error logging in: ' + error.message;
-                }
+                errorDiv.textContent = 'Error logging in: ' + (error.response ? error.response.data.error : error.message);
             });
         });
     </script>
