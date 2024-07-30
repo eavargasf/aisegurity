@@ -34,7 +34,7 @@ app.post('/register', async (req, res) => {
 
         res.status(201).json(response.data);
     } catch (error) {
-        console.error('Error registering user:', error);
+        console.error('Error registering user:', error.message);
         res.status(500).json({ error: 'Error registering user', details: error.message });
     }
 });
@@ -58,7 +58,7 @@ app.post('/login', async (req, res) => {
             res.status(400).json({ error: 'Invalid email or password' });
         }
     } catch (error) {
-        console.error('Error logging in:', error);
+        console.error('Error logging in:', error.message);
         res.status(500).json({ error: 'Error logging in', details: error.message });
     }
 });
