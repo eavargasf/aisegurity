@@ -1,47 +1,135 @@
-document.getElementById('registration-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const redeemCode = document.getElementById('redeem-code').value;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: darkblue;
+        }
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1200px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .graph {
+            flex: 1;
+            padding: 20px;
+            border-right: 1px solid #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fafafa;
+        }
+        .graph img {
+            max-width: 100%;
+            height: auto;
+        }
+        .form-container {
+            flex: 1;
+            padding: 40px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #666;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 20px;
+        }
+    </style>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔓</text></svg>">
+</head>
+<body>
+    <div id="container">
+        <div id="graph-container">
+            <img src="path/to/your/graph-image.png" alt="Graph Image">
+        </div>
+        <div id="form-container">
+            <div id="registration">
+                <h2>Registration</h2>
+                <form id="registration-form">
+                    <div>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div>
+                        <label for="redeem-code">Redeem Code:</label>
+                        <input type="text" id="redeem-code" name="redeem-code" required>
+                    </div>
+                    <div id="registration-error" style="color: red;"></div>
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+            <div id="login">
+                <h2>Login</h2>
+                <form id="login-form">
+                    <div>
+                        <label for="email-login">Email:</label>
+                        <input type="email" id="email-login" name="email" required>
+                    </div>
+                    <div>
+                        <label for="password-login">Password:</label>
+                        <input type="password" id="password-login" name="password" required>
+                    </div>
+                    <div id="login-error" style="color: red;"></div>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
 
-    const errorDiv = document.getElementById('registration-error');
-    errorDiv.textContent = '';
-
-    axios.post('/register', {
-        name,
-        email,
-        password,
-        redeemCode
-    })
-    .then(response => {
-        alert('Registration successful!');
-        window.location.href = 'dashboard.html';
-    })
-    .catch(error => {
-        const errorMessage = error.response && error.response.data ? error.response.data.error : error.message;
-        errorDiv.textContent = 'Error registering: ' + errorMessage;
-    });
-});
-
-document.getElementById('login-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const email = document.getElementById('email-login').value;
-    const password = document.getElementById('password-login').value;
-
-    const errorDiv = document.getElementById('login-error');
-    errorDiv.textContent = '';
-
-    axios.post('/login', {
-        email,
-        password
-    })
-    .then(response => {
-        alert('Login successful!');
-        window.location.href = 'dashboard.html';
-    })
-    .catch(error => {
-        const errorMessage = error.response && error.response.data ? error.response.data.error : error.message;
-        errorDiv.textContent = 'Error logging in: ' + errorMessage;
-    });
-});
