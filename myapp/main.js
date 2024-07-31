@@ -8,7 +8,7 @@ document.getElementById('registration-form').addEventListener('submit', function
     const errorDiv = document.getElementById('registration-error');
     errorDiv.textContent = '';
 
-    axios.post('http://localhost:3000/', {
+    axios.post('https://the-uncuffed.online/register', { // Ensure this URL is correct
         name,
         email,
         password,
@@ -32,7 +32,7 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
     const errorDiv = document.getElementById('login-error');
     errorDiv.textContent = '';
 
-    axios.post('http://localhost:3000/', {
+    axios.post('https://the-uncuffed.online/login', { // Ensure this URL is correct
         email,
         password
     })
@@ -45,4 +45,3 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
         errorDiv.textContent = 'Error logging in: ' + errorMessage;
     });
 });
-
