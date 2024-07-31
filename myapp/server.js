@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'https://the-uncuffed.online/login-registration.html' // Ensure this is your frontend domain
+    origin: 'https://the-uncuffed.online' // Ensure this is your frontend domain
 }));
 
 const AIRTABLE_API_URL = 'https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations';
@@ -38,8 +38,8 @@ app.post('/register', async (req, res) => {
 
         res.status(201).json(response.data);
     } catch (error) {
-        console.error('Error registering user:', error.message);
-        res.status(500).json({ error: 'Error registering user', details: error.message });
+        console.error('Error registering user:', error.response ? error.response.data : error.message);
+        res.status(500).json({ error: 'Error registering user', details: error.response ? error.response.data : error.message });
     }
 });
 
@@ -62,8 +62,8 @@ app.post('/login', async (req, res) => {
             res.status(400).json({ error: 'Invalid email or password' });
         }
     } catch (error) {
-        console.error('Error logging in:', error.message);
-        res.status(500).json({ error: 'Error logging in', details: error.message });
+        console.error('Error logging in:', error.response ? error.response.data : error.message);
+        res.status(500).json({ error: 'Error logging in', details: error.response ? error.response.data : error.message });
     }
 });
 
