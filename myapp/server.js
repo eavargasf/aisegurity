@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'https://the-uncuffed.online/login-registration'
+    origin: 'https://the-uncuffed.online'
 }));
 
 const AIRTABLE_API_URL = 'https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations';
@@ -19,7 +19,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.post('/login-registration', async (req, res) => {
+app.post('/register', async (req, res) => {
     try {
         const { name, email, password, redeemCode } = req.body;
         const validRedeemCodes = ['AI1532', 'AI1234', 'AI5678'];
@@ -50,7 +50,7 @@ app.post('/login-registration', async (req, res) => {
     }
 });
 
-app.post('/login-registration', async (req, res) => {
+app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
 
@@ -78,3 +78,4 @@ app.post('/login-registration', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
