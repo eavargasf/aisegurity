@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const errorDiv = document.getElementById('registration-error');
         errorDiv.textContent = '';
 
-        axios.post('https://the-uncuffed.online/login-registration', {
+        axios.post('https://the-uncuffed.online/', {
             name,
             email,
             password,
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const errorDiv = document.getElementById('login-error');
         errorDiv.textContent = '';
 
-        axios.post('https://the-uncuffed.online/login-registration', {
+        axios.post('https://the-uncuffed.online/', {
             email,
             password
         })
