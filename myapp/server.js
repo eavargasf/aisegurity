@@ -19,7 +19,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.post('/register', async (req, res) => {
+app.post('/login-registration', async (req, res) => {
     try {
         const { name, email, password, redeemCode } = req.body;
         const validRedeemCodes = ['AI1532', 'AI1234', 'AI5678'];
@@ -50,7 +50,7 @@ app.post('/register', async (req, res) => {
     }
 });
 
-app.post('/login', async (req, res) => {
+app.post('/login-registration', async (req, res) => {
     try {
         const { email, password } = req.body;
 
