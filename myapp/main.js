@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const errorDiv = document.getElementById('registration-error');
         errorDiv.textContent = '';
 
-        axios.post('https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations'', {
+        axios.post('https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations', {
             name,
             email,
             password,
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const errorDiv = document.getElementById('login-error');
         errorDiv.textContent = '';
 
-        axios.post('https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations'', {
+        axios.post('https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations', {
             email,
             password
         })
