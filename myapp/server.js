@@ -7,11 +7,17 @@ const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'https://the-uncuffed.online/login-registration' // Ensure this is your frontend domain
+    origin: 'https://the-uncuffed.online/login-registration'
 }));
 
 const AIRTABLE_API_URL = 'https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations';
 const AIRTABLE_API_KEY = 'patvsM7l2QxYV6BSV.e48172c74aea3f9b96ae4918907e30c45f0ca719bbc2ad91173fddbbaa25e426';
+
+// Logging middleware
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.url} - ${new Date().toISOString()}`);
+    next();
+});
 
 app.post('/register', async (req, res) => {
     try {
@@ -36,6 +42,7 @@ app.post('/register', async (req, res) => {
             }
         });
 
+        console.log('User registered:', response.data);
         res.status(201).json(response.data);
     } catch (error) {
         console.error('Error registering user:', error.response ? error.response.data : error.message);
@@ -57,6 +64,7 @@ app.post('/login', async (req, res) => {
         const user = records.find(record => record.fields.Email === email && record.fields.Password === password);
 
         if (user) {
+            console.log('User logged in:', user.fields.Email);
             res.status(200).json({ message: 'Login successful' });
         } else {
             res.status(400).json({ error: 'Invalid email or password' });
