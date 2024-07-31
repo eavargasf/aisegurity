@@ -8,7 +8,7 @@ document.getElementById('registration-form').addEventListener('submit', function
     const errorDiv = document.getElementById('registration-error');
     errorDiv.textContent = '';
 
-    axios.post('http://localhost:3000/register', {
+    axios.post('http://localhost:3000/', {
         name,
         email,
         password,
@@ -32,7 +32,7 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
     const errorDiv = document.getElementById('login-error');
     errorDiv.textContent = '';
 
-    axios.post('http://localhost:3000/login', {
+    axios.post('http://localhost:3000/', {
         email,
         password
     })
