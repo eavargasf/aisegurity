@@ -114,7 +114,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        document.getElementById('registration-form').addEventListener('submit', function(e) {
+      document.getElementById('registration-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
@@ -124,7 +124,7 @@
     const errorDiv = document.getElementById('registration-error');
     errorDiv.textContent = '';
 
-    axios.post('/register', {
+    axios.post('http://localhost:3000/register', {
         name,
         email,
         password,
@@ -148,7 +148,7 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
     const errorDiv = document.getElementById('login-error');
     errorDiv.textContent = '';
 
-    axios.post('/login', {
+    axios.post('http://localhost:3000/login', {
         email,
         password
     })
@@ -161,6 +161,7 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
         errorDiv.textContent = 'Error logging in: ' + errorMessage;
     });
 });
+
 
     </script>
 </body>
