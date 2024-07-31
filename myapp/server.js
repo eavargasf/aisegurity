@@ -13,7 +13,6 @@ app.use(cors({
 const AIRTABLE_API_URL = 'https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations';
 const AIRTABLE_API_KEY = 'patvsM7l2QxYV6BSV.e48172c74aea3f9b96ae4918907e30c45f0ca719bbc2ad91173fddbbaa25e426';
 
-// Logging middleware
 app.use((req, res, next) => {
     console.log(`${req.method} ${req.url} - ${new Date().toISOString()}`);
     next();
@@ -76,5 +75,5 @@ app.post('/login', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
