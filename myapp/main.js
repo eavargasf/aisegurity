@@ -21,6 +21,7 @@ document.getElementById('registration-form').addEventListener('submit', function
     .catch(error => {
         const errorMessage = error.response && error.response.data ? error.response.data.error : error.message;
         errorDiv.textContent = 'Error registering: ' + errorMessage;
+        console.error('Registration error:', errorMessage);
     });
 });
 
@@ -43,5 +44,6 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
     .catch(error => {
         const errorMessage = error.response && error.response.data ? error.response.data.error : error.message;
         errorDiv.textContent = 'Error logging in: ' + errorMessage;
+        console.error('Login error:', errorMessage);
     });
 });
