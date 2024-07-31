@@ -1,0 +1,108 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+
+.popup {
+  text-align: center;
+  padding: 20px;
+}
+
+input[type="password"] {
+  padding: 10px;
+  margin: 10px 0;
+  width: calc(100% - 22px);
+}
+
+button {
+  padding: 10px;
+  background-color: #3498db;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  text-align: center;
+}
+
+input[type="password"] {
+  padding: 10px;
+  margin: 10px 0;
+  width: calc(100% - 22px);
+}
+
+button {
+  padding: 10px;
+  background-color: #3498db;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+.features {
+            padding: 80px 0;
+}
+.feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+}
+.feature-card {
+            background: var(--primary-color);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+}
+.feature-card:hover {
+            transform: translateY(-5px);
+}
+.feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+#message {
+  margin-top: 10px;
+}
+#popup-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 300px;
+}
+
+.popup {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.popup.show {
+  opacity: 1;
+}
