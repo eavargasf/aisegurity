@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'https://the-uncuffed.online' // Update this to your frontend domain
+    origin: 'https://the-uncuffed.online' // Ensure this is your frontend domain
 }));
 
 const AIRTABLE_API_URL = 'https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations';
