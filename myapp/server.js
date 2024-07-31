@@ -68,3 +68,5 @@ app.post('/login', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+const cors = require('cors');
+app.use(cors());
