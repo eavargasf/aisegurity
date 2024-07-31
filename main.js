@@ -8,7 +8,7 @@ document.getElementById('registration-form').addEventListener('submit', function
     const errorDiv = document.getElementById('registration-error');
     errorDiv.textContent = '';
 
-    axios.post('https://the-uncuffed.online/login-registration.html', { // Ensure this URL is correct
+    axios.post('https://the-uncuffed.online/login-registration.html', {
         name,
         email,
         password,
@@ -32,7 +32,7 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
     const errorDiv = document.getElementById('login-error');
     errorDiv.textContent = '';
 
-    axios.post('https://the-uncuffed.online/login-registration.html', { // Ensure this URL is correct
+    axios.post('https://the-uncuffed.online/login-registration.html', {
         email,
         password
     })
