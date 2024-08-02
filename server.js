@@ -4,12 +4,11 @@ const cors = require('cors');
 const axios = require('axios');
 
 const app = express();
-const port = 3000;
 
 app.use(cors());
 app.use(express.json());
 
-const AIRTABLE_API_ENDPOINT = process.env.AIRTABLE_API_ENDPOINT;
+const AIRTABLE_API_ENDPOINT = process.env.AIRTABLE_API_ENDPOINT || 'https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations';
 const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 
 app.post('/login', async (req, res) => {
@@ -36,6 +35,12 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-});
+// This allows the app to be run locally or as a module
+if (require.main === module) {
+    const port = process.env.PORT || 3000;
+    app.listen(port, () => {
+        console.log(`Server running on port ${port}`);
+    });
+} else {
+    module.exports = app;
+}
