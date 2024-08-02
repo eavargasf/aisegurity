@@ -11,7 +11,11 @@
       "src": "/(.*)",
       "dest": "myapp/server.js"
     }
-  ]
+  ],
+  "env": {
+    "API_KEY": "cKrl3I0v78Fl3uquPDZMovfH"
+  }
 }
+
 
   
