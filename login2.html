@@ -102,45 +102,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        const validRedeemCodes = ['AI1532', 'AI1234', 'AI5678'];
-
-        document.getElementById('registration-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const redeemCode = document.getElementById('redeem-code').value;
-
-            const errorDiv = document.getElementById('registration-error');
-            errorDiv.textContent = '';
-
-            if (!validRedeemCodes.includes(redeemCode)) {
-                errorDiv.textContent = 'Invalid Redeem Code';
-                return;
-            }
-
-            axios.post('https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations', {
-                fields: {
-                    Name: name,
-                    Email: email,
-                    Password: password,
-                    RedeemCode: redeemCode
-                }
-            }, {
-                headers: {
-                    'Authorization': 'Bearer patvsM7l2QxYV6BSV.e48172c74aea3f9b96ae4918907e30c45f0ca719bbc2ad91173fddbbaa25e426',
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => {
-                alert('Registration successful!');
-                window.location.href = 'dashboard.html';
-            })
-            .catch(error => {
-                errorDiv.textContent = 'Error registering: ' + error.message;
-            });
-        });
-
+        
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const email = document.getElementById('email-login').value;
