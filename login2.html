@@ -1,87 +1,97 @@
-import React, { useState } from 'react';
-
-const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMessage('');
-
-    try {
-      const url = `https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations?filterByFormula=AND({Email}='${encodeURIComponent(email)}',{Password}='${encodeURIComponent(password)}')`;
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Authorization': 'Bearer patvsM7l2QxYV6BSV.e48172c74aea3f9b96ae4918907e30c45f0ca719bbc2ad91173fddbbaa25e426'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
         }
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-
-      if (data.records && data.records.length > 0) {
-        setMessage('Login successful!');
-      } else {
-        setMessage('Invalid email or password');
-      }
-    } catch (error) {
-      setMessage('An error occurred. Please try again.');
-      console.error('Error:', error);
-    }
-  };
-
-  return (
-    <div className="flex h-screen bg-gray-100">
-      <div className="w-1/2 bg-cover bg-center" style={{backgroundImage: "url('/api/placeholder/800/600')"}}></div>
-      <div className="w-1/2 flex items-center justify-center">
-        <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-md">
-          <h2 className="text-2xl font-bold mb-6 text-center">Sign in to your account</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email</label>
-              <input
-                type="email"
-                id="email"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div className="mb-6">
-              <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">Password</label>
-              <input
-                type="password"
-                id="password"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <div className="flex items-center justify-between">
-              <button
-                type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                Sign In
-              </button>
-            </div>
-          </form>
-          {message && (
-            <p className={`mt-4 text-center ${message.includes('successful') ? 'text-green-500' : 'text-red-500'}`}>
-              {message}
-            </p>
-          )}
-        </div>
-      </div>
+        .image-container {
+            flex: 1;
+            background-image: url('https://source.unsplash.com/random/800x600');
+            background-size: cover;
+            background-position: center;
+        }
+        .form-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        form {
+            width: 300px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #message {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container"></div>
+    <div class="form-container">
+        <form id="loginForm">
+            <h2>Login</h2>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Sign In</button>
+            <div id="message"></div>
+        </form>
     </div>
-  );
-};
 
-export default LoginPage;
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const messageElement = document.getElementById('message');
+
+            const url = `https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations?filterByFormula=AND({Email}='${encodeURIComponent(email)}',{Password}='${encodeURIComponent(password)}')`;
+
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer patvsM7l2QxYV6BSV.e48172c74aea3f9b96ae4918907e30c45f0ca719bbc2ad91173fddbbaa25e426'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.records && data.records.length > 0) {
+                    messageElement.textContent = 'Login successful!';
+                    messageElement.style.color = 'green';
+                } else {
+                    messageElement.textContent = 'Invalid email or password';
+                    messageElement.style.color = 'red';
+                }
+            })
+            .catch(error => {
+                messageElement.textContent = 'An error occurred. Please try again.';
+                messageElement.style.color = 'red';
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
