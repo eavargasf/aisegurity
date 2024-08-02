@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
@@ -8,8 +9,8 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-const AIRTABLE_API_ENDPOINT = 'https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations';
-const AIRTABLE_API_KEY = 'patvsM7l2QxYV6BSV.e48172c74aea3f9b96ae4918907e30c45f0ca719bbc2ad91173fddbbaa25e426';
+const AIRTABLE_API_ENDPOINT = process.env.AIRTABLE_API_ENDPOINT;
+const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
