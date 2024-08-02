@@ -11,7 +11,7 @@ app.use(cors({
 }));
 
 const AIRTABLE_API_URL = 'https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations';
-const AIRTABLE_API_KEY = 'patvsM7l2QxYV6BSV.e48172c74aea3f9b96ae4918907e30c45f0ca719bbc2ad91173fddbbaa25e426';
+const AIRTABLE_API_KEY = 'Bearer patvsM7l2QxYV6BSV.e48172c74aea3f9b96ae4918907e30c45f0ca719bbc2ad91173fddbbaa25e426';
 
 app.use((req, res, next) => {
     console.log(`${req.method} ${req.url} - ${new Date().toISOString()}`);
@@ -36,7 +36,7 @@ app.post('/register', async (req, res) => {
             }
         }, {
             headers: {
-                'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
+                'Authorization': AIRTABLE_API_KEY,
                 'Content-Type': 'application/json'
             }
         });
@@ -55,7 +55,7 @@ app.post('/login', async (req, res) => {
 
         const response = await axios.get(AIRTABLE_API_URL, {
             headers: {
-                'Authorization': `Bearer ${AIRTABLE_API_KEY}`
+                'Authorization': AIRTABLE_API_KEY
             }
         });
 
