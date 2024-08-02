@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
-require('dotenv').config();
 
 const app = express();
 const port = 3000;
@@ -9,20 +8,19 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
-const AIRTABLE_BASE_ID = 'appFZBJefIOmr86zR';
-const AIRTABLE_TABLE_NAME = 'Registrations';
+const AIRTABLE_API_ENDPOINT = 'https://api.airtable.com/v0/appFZBJefIOmr86zR/Registrations';
+const AIRTABLE_API_KEY = 'patvsM7l2QxYV6BSV.e48172c74aea3f9b96ae4918907e30c45f0ca719bbc2ad91173fddbbaa25e426';
 
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
     
     try {
-        const response = await axios.get(`https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`, {
+        const response = await axios.get(AIRTABLE_API_ENDPOINT, {
             headers: {
                 'Authorization': `Bearer ${AIRTABLE_API_KEY}`
             },
             params: {
-                filterByFormula: `AND({Email}='${email}',{Password}='${password}')`
+                filterByFormula: `AND({Email}='${encodeURIComponent(email)}',{Password}='${encodeURIComponent(password)}')`
             }
         });
 
