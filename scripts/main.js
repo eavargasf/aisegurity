@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const registrationForm = document.getElementById('registration-form');
     const loginForm = document.getElementById('login-form');
 
+    const BASE_URL = 'https://your-deployed-url.vercel.app'; // Replace with your Vercel deployment URL
+
     if (registrationForm) {
         registrationForm.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -14,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             errorDiv.textContent = '';
 
             try {
-                const response = await axios.post('https://the-uncuffed.online/register', {
+                const response = await axios.post(`${BASE_URL}/register`, {
                     name,
                     email,
                     password,
@@ -40,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
             errorDiv.textContent = '';
 
             try {
-                const response = await axios.post('https://the-uncuffed.online/login', {
+                const response = await axios.post(`${BASE_URL}/login`, {
                     email,
                     password
                 });
@@ -54,4 +56,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
