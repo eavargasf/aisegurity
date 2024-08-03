@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import os
-import requests  # Add this import
+import requests  # Ensure requests is imported
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -42,5 +42,6 @@ def dashboard():
         return redirect(url_for('login'))
     return f"Welcome to the dashboard, {session['user']}!"
 
+# This block should be at the end of the file
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
