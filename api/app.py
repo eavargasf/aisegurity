@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import os
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
