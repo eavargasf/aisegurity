@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import os
-import requests
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -8,7 +7,6 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
-# Load API key from environment variable
 AIRTABLE_API_ENDPOINT = os.getenv('AIRTABLE_API_ENDPOINT')
 AIRTABLE_API_KEY = os.getenv('AIRTABLE_API_KEY')
 
@@ -18,7 +16,6 @@ def login():
         email = request.form['email']
         password = request.form['password']
         
-        # Check credentials with Airtable
         headers = {
             'Authorization': f'Bearer {AIRTABLE_API_KEY}',
             'Content-Type': 'application/json'
