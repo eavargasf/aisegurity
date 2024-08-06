@@ -11,6 +11,10 @@ app.secret_key = os.urandom(24)
 AIRTABLE_API_ENDPOINT = os.getenv('AIRTABLE_API_ENDPOINT')
 AIRTABLE_API_KEY = os.getenv('AIRTABLE_API_KEY')
 
+@app.route('/')
+def index():
+    return redirect(url_for('login'))
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -52,4 +56,5 @@ def dashboard():
 # This block should be at the end of the file
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
 
