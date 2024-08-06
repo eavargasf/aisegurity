@@ -53,8 +53,8 @@ def dashboard():
         return redirect(url_for('login'))
     return render_template('dashboard.html', user=session['user'])
 
-# This block should be at the end of the file
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
 
 
