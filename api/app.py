@@ -25,7 +25,7 @@ def login():
             'Authorization': f'Bearer {AIRTABLE_API_KEY}',
             'Content-Type': 'application/json'
         }
-        
+
         try:
             response = requests.get(AIRTABLE_API_ENDPOINT, headers=headers)
             response.raise_for_status()
@@ -42,7 +42,7 @@ def login():
             if fields.get('Email') == email and fields.get('Password') == password:
                 session['user'] = email
                 return redirect(url_for('dashboard'))
-        
+
         return "Invalid credentials", 401
 
     return render_template('login.html')
@@ -55,6 +55,3 @@ def dashboard():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
-
-
-
