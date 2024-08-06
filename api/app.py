@@ -34,11 +34,8 @@ def login():
             return "Error connecting to Airtable", 500
 
         records = response.json().get('records', [])
-        print(f"Fetched records: {records}")
-
         for record in records:
             fields = record['fields']
-            print(f"Checking record: {fields}")
             if fields.get('Email') == email and fields.get('Password') == password:
                 session['user'] = email
                 return redirect(url_for('dashboard'))
