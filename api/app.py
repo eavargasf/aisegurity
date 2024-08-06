@@ -16,32 +16,40 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        
+
         headers = {
             'Authorization': f'Bearer {AIRTABLE_API_KEY}',
             'Content-Type': 'application/json'
         }
-        response = requests.get(AIRTABLE_API_ENDPOINT, headers=headers)
         
-        if response.status_code == 200:
-            records = response.json().get('records', [])
-            for record in records:
-                fields = record['fields']
-                if fields.get('Email') == email and fields.get('Password') == password:
-                    session['user'] = email
-                    return redirect(url_for('dashboard'))
-            return "Invalid credentials", 401
-        else:
+        try:
+            response = requests.get(AIRTABLE_API_ENDPOINT, headers=headers)
+            response.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching data from Airtable: {e}")
             return "Error connecting to Airtable", 500
-    
+
+        records = response.json().get('records', [])
+        print(f"Fetched records: {records}")
+
+        for record in records:
+            fields = record['fields']
+            print(f"Checking record: {fields}")
+            if fields.get('Email') == email and fields.get('Password') == password:
+                session['user'] = email
+                return redirect(url_for('dashboard'))
+        
+        return "Invalid credentials", 401
+
     return render_template('login.html')
 
 @app.route('/dashboard')
 def dashboard():
     if 'user' not in session:
         return redirect(url_for('login'))
-    return f"Welcome to the dashboard, {session['user']}!"
+    return render_template('dashboard.html', user=session['user'])
 
 # This block should be at the end of the file
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
