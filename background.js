@@ -49,3 +49,4 @@ chrome.webRequest.onBeforeRequest.addListener(
   {urls: ["*://*.doubleclick.net/*", "*://*.google-analytics.com/*"]},
   ["blocking"]
 );
+
