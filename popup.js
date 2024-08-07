@@ -10,3 +10,4 @@ document.getElementById('go-button').addEventListener('click', () => {
     document.getElementById('message').innerText = 'Invalid code. Please purchase the product to activate.';
   }
 });
+
