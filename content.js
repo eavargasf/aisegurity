@@ -4,3 +4,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
     chrome.runtime.sendMessage({notification: 'AI-generated content detected on this page.'});
   }
 });
+
